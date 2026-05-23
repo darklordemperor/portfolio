@@ -1,6 +1,6 @@
-# Apirat Methasathien Portfolio
+# Apirat Mathasathien Portfolio
 
-Personal portfolio website for Apirat Methasathien, a Mobile App Developer specializing in React Native and Flutter for Android and iOS.
+Personal portfolio website for Apirat Mathasathien, a Mobile App Developer specializing in React Native and Flutter for Android and iOS.
 
 ## Tech Stack
 
@@ -72,7 +72,7 @@ npm run deploy
 If the GitHub repository name changes, update the `base` value in `vite.config.ts` to match:
 
 ```ts
-base: '/your-repo-name/'
+base: "/your-repo-name/";
 ```
 
 ## Project Structure
@@ -103,4 +103,4 @@ src/
 - Email: apirat55555@gmail.com
 - Phone: +66 0809429155
 - GitHub: https://github.com/apirat55555
-- LinkedIn: https://www.linkedin.com/in/apirat-methasathien
+- LinkedIn: https://www.linkedin.com/in/apirat-mathasathien
