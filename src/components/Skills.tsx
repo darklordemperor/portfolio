@@ -3,7 +3,7 @@ import { Section } from './Section'
 
 export function Skills() {
   return (
-    <Section id="skills" eyebrow="Skills" title="Mobile-first stack with cloud delivery">
+    <Section id="skills" eyebrow="Skills" title="Mobile and web skills with delivery tools">
       <div className="grid gap-5 lg:grid-cols-2">
         {skillGroups.map((group) => {
           const GroupIcon = group.icon

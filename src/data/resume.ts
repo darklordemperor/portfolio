@@ -1,14 +1,14 @@
 import {
-  Bot,
   Boxes,
   BrainCircuit,
-  Cloud,
+  CheckCircle2,
   Code2,
-  Database,
+  FlaskConical,
   GitBranch,
   Globe2,
   GraduationCap,
   Hammer,
+  ListChecks,
   Languages,
   Map,
   MonitorSmartphone,
@@ -36,6 +36,16 @@ export type SkillGroup = {
   }>;
 };
 
+export type Workflow = {
+  title: string;
+  description: string;
+  steps: Array<{
+    label: string;
+    detail: string;
+    icon: LucideIcon;
+  }>;
+};
+
 export const profile = {
   name: "Apirat Mathasathien",
   thaiName: "อภิรัตน์ เมธาเสถียร",
@@ -47,9 +57,9 @@ export const profile = {
   github: "https://github.com/apirat55555",
   linkedin: "https://www.linkedin.com/in/apirat-mathasathien",
   tagline:
-    "Building polished Android and iOS apps with React Native, Flutter, cloud infrastructure, and production deployment discipline.",
+    "Building polished Android and iOS apps with React Native, Flutter, web UI skills, and production deployment discipline.",
   summary:
-    "Mobile developer specializing in React Native and Flutter for Android and iOS. Skilled in Android native code, Google Cloud Platform, Docker, and end-to-end app deployment to Google Play Store. Currently growing toward a Senior Mobile Developer role through deeper platform ownership, architecture, and product delivery.",
+    "Mobile developer specializing in React Native and Flutter for Android and iOS, with practical web frontend experience. Skilled in Android native code, Docker-based tooling, and end-to-end app deployment to Google Play Store. Currently growing toward a Senior Mobile Developer role through deeper platform ownership, architecture, and product delivery.",
 } as const;
 
 export const contacts: ContactLink[] = [
@@ -68,7 +78,7 @@ export const experience = {
     "Mobile app development with React Native and Flutter for Android and iOS.",
     "Android native code for platform-specific features and device integrations.",
     "Build and publish workflows for production releases to Google Play Store.",
-    "Google Cloud Platform usage for backend and infrastructure management.",
+    "Docker and cloud tooling usage for project setup, build support, and release preparation.",
     "macOS development environment for iOS builds and release preparation.",
     "Delivered EV Charging App and Fortune-telling App projects.",
   ],
@@ -91,6 +101,73 @@ export const projects = [
   },
 ] as const;
 
+export const workflows: Workflow[] = [
+  {
+    title: "Mobile Development Flow",
+    description:
+      "A release-minded flow for React Native and Flutter apps, from requirement clarity to store-ready delivery.",
+    steps: [
+      {
+        label: "Get Requirements",
+        detail: "Clarify business goal, user journey, platforms, APIs, device behavior, and release scope.",
+        icon: ListChecks,
+      },
+      {
+        label: "Develop",
+        detail: "Build screens, state, integrations, native features, and platform-specific app behavior.",
+        icon: Code2,
+      },
+      {
+        label: "Unit Test",
+        detail: "Validate core logic and components with Jest, Flutter test, or framework-level tests.",
+        icon: FlaskConical,
+      },
+      {
+        label: "Automation E2E Test",
+        detail: "Run end-to-end scenarios for important flows such as login, checkout, booking, or payment.",
+        icon: CheckCircle2,
+      },
+      {
+        label: "Deploy",
+        detail: "Prepare builds, review release settings, and publish through Google Play or app delivery tools.",
+        icon: Rocket,
+      },
+    ],
+  },
+  {
+    title: "Web Development Flow",
+    description:
+      "A practical web workflow for turning product logic into responsive, tested, and deployable interfaces.",
+    steps: [
+      {
+        label: "Confirm Scope",
+        detail: "Review requirements, user roles, content, page structure, API contracts, and success criteria.",
+        icon: ListChecks,
+      },
+      {
+        label: "Design UI Structure",
+        detail: "Map layouts, reusable components, routes, forms, loading states, and responsive behavior.",
+        icon: MonitorSmartphone,
+      },
+      {
+        label: "Develop Frontend",
+        detail: "Implement pages, interactions, state handling, service calls, validation, and accessibility basics.",
+        icon: Code2,
+      },
+      {
+        label: "Test & Review",
+        detail: "Check unit behavior, browser rendering, responsive views, user flow, and edge-case handling.",
+        icon: FlaskConical,
+      },
+      {
+        label: "Deploy & Monitor",
+        detail: "Build production assets, deploy, verify live behavior, and keep track of feedback or fixes.",
+        icon: Rocket,
+      },
+    ],
+  },
+];
+
 export const skillGroups: SkillGroup[] = [
   {
     title: "Mobile",
@@ -105,22 +182,21 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: "Backend",
-    icon: Cloud,
+    title: "Web",
+    icon: Globe2,
     skills: [
-      { name: "Google Cloud", icon: Cloud },
-      { name: "Firebase", icon: Database },
+      { name: "React", icon: Code2 },
       { name: "Next.js", icon: Globe2 },
       { name: "Angular", icon: Code2 },
-      { name: "AI Agents", icon: Bot },
-      { name: "ChatGPT", icon: BrainCircuit },
+      { name: "TypeScript", icon: Code2 },
+      { name: "Responsive UI", icon: MonitorSmartphone },
+      { name: "API Integration", icon: GitBranch },
     ],
   },
   {
-    title: "DevOps",
-    icon: Boxes,
+    title: "Versioning & Release",
+    icon: GitBranch,
     skills: [
-      { name: "Docker", icon: Boxes },
       { name: "Git", icon: GitBranch },
       { name: "GitHub", icon: GitBranch },
       { name: "GitLab", icon: GitBranch },
@@ -132,6 +208,7 @@ export const skillGroups: SkillGroup[] = [
     title: "Tools",
     icon: Wrench,
     skills: [
+      { name: "Docker", icon: Boxes },
       { name: "Android Studio", icon: MonitorSmartphone },
       { name: "Google Maps", icon: Map },
       { name: "macOS Builds", icon: TerminalSquare },

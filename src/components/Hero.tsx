@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 import { ArrowDown, BriefcaseBusiness, GitBranch, Mail, Phone, Smartphone } from 'lucide-react'
 import { contacts, profile } from '../data/resume'
 import { scrollToSection } from '../utils/scroll'
@@ -10,14 +11,24 @@ const contactIcons = {
 } as const
 
 export function Hero() {
+  const heroRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  })
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -52])
+  const cardY = useTransform(scrollYProgress, [0, 1], [0, -28])
+
   return (
     <section
+      ref={heroRef}
       id="hero"
       className="relative mx-auto grid min-h-screen w-full max-w-6xl scroll-mt-24 items-center gap-10 px-5 pb-14 pt-28 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:px-10"
     >
       <motion.div
-        initial={{ opacity: 0, y: 28 }}
-        animate={{ opacity: 1, y: 0 }}
+        style={{ y: textY }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.65, ease: 'easeOut' }}
       >
         <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-200">
@@ -54,6 +65,7 @@ export function Hero() {
 
       <motion.div
         className="relative"
+        style={{ y: cardY }}
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.7, delay: 0.12, ease: 'easeOut' }}

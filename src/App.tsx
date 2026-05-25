@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { About } from "./components/About";
 import { Contact } from "./components/Contact";
@@ -7,17 +8,36 @@ import { Hero } from "./components/Hero";
 import { Navigation } from "./components/Navigation";
 import { Projects } from "./components/Projects";
 import { Skills } from "./components/Skills";
+import { Workflow } from "./components/Workflow";
+
+export type ThemeMode = "dark" | "light";
 
 function PortfolioPage() {
+  const [theme, setTheme] = useState<ThemeMode>(() => {
+    const savedTheme = window.localStorage.getItem("portfolio-theme");
+
+    return savedTheme === "light" ? "light" : "dark";
+  });
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("portfolio-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
+  };
+
   return (
-    <div className="min-h-screen overflow-hidden bg-slate-950 text-slate-200">
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.18),transparent_34%),linear-gradient(180deg,#020617_0%,#0f172a_48%,#111827_100%)]" />
-      <Navigation />
+    <div className={`theme-${theme} min-h-screen overflow-hidden bg-slate-950 text-slate-200`}>
+      <div className="site-backdrop pointer-events-none fixed inset-0 -z-10" />
+      <Navigation theme={theme} onToggleTheme={toggleTheme} />
       <main>
         <Hero />
         <About />
         <Experience />
         <Projects />
+        <Workflow />
         <Skills />
         <Education />
         <Contact />
