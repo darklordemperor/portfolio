@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { ArrowDown, BriefcaseBusiness, GitBranch, Mail, Phone, Smartphone } from 'lucide-react'
+import { copy, type LanguageMode } from '../data/i18n'
 import { contacts, profile } from '../data/resume'
 import { scrollToSection } from '../utils/scroll'
 
@@ -10,7 +11,12 @@ const contactIcons = {
   LinkedIn: BriefcaseBusiness,
 } as const
 
-export function Hero() {
+type HeroProps = {
+  language: LanguageMode
+}
+
+export function Hero({ language }: HeroProps) {
+  const text = copy[language]
   const heroRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -33,19 +39,19 @@ export function Hero() {
       >
         <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-200">
           <Smartphone className="h-4 w-4" />
-          {profile.experience} mobile development
+          {profile.experience} {text.hero.experience}
         </div>
-        <p className="mb-3 text-lg text-slate-300">{profile.thaiName}</p>
+        <p className="mb-3 text-lg text-slate-300">{text.hero.secondaryName}</p>
         <h1 className="max-w-4xl text-5xl font-bold leading-tight text-white sm:text-6xl lg:text-7xl">
-          {profile.name}
+          {text.hero.name}
         </h1>
         <p className="mt-5 text-2xl font-semibold text-sky-300 sm:text-3xl">
-          {profile.role} <span className="text-slate-400">({profile.focus})</span>
+          {text.hero.rolePrefix} <span className="text-slate-400">({profile.focus})</span>
         </p>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{profile.tagline}</p>
+        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{text.hero.tagline}</p>
         <div className="mt-8 flex flex-wrap gap-3">
           {contacts.map((contact) => {
-            const Icon = contactIcons[contact.label as keyof typeof contactIcons]
+            const Icon = contactIcons[contact.label as keyof typeof contactIcons] ?? BriefcaseBusiness
 
             return (
               <a
@@ -79,12 +85,12 @@ export function Hero() {
           </div>
           <pre className="overflow-hidden text-sm leading-7 text-slate-300 sm:text-base">
             <code>{`const developer = {
-  name: '${profile.name}',
+  name: '${text.hero.name}',
   stack: ['React Native', 'Flutter'],
   platforms: ['Android', 'iOS'],
   cloud: 'Google Cloud Platform',
   deploy: 'Google Play Store',
-  goal: 'Senior Mobile Developer'
+  goal: '${text.hero.developerGoal}'
 }`}</code>
           </pre>
         </div>
@@ -93,7 +99,7 @@ export function Hero() {
           onClick={() => scrollToSection('about')}
           className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-sky-300 transition hover:text-sky-100"
         >
-          View portfolio
+          {text.hero.viewPortfolio}
           <ArrowDown className="h-4 w-4" />
         </button>
         <div className="mt-4 flex flex-col gap-2 text-sm text-slate-400">

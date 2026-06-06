@@ -1,12 +1,22 @@
 import { CheckCircle2 } from 'lucide-react'
+import { copy, type LanguageMode } from '../data/i18n'
 import { experience } from '../data/resume'
 import { Section } from './Section'
 
-export function Experience() {
+type ExperienceProps = {
+  language: LanguageMode
+}
+
+export function Experience({ language }: ExperienceProps) {
   const Icon = experience.icon
+  const text = copy[language]
 
   return (
-    <Section id="experience" eyebrow="Experience" title="Production mobile app work">
+    <Section
+      id="experience"
+      eyebrow={text.sections.experienceEyebrow}
+      title={text.sections.experienceTitle}
+    >
       <div className="relative border-l border-sky-400/30 pl-6 sm:pl-8">
         <div className="absolute -left-[9px] top-2 h-4 w-4 rounded-full border-2 border-sky-300 bg-slate-950" />
         <article className="rounded-lg border border-slate-800 bg-slate-900/70 p-6">
@@ -25,7 +35,7 @@ export function Experience() {
             </div>
           </div>
           <ul className="mt-6 grid gap-3 text-slate-300 sm:grid-cols-2">
-            {experience.bullets.map((bullet) => (
+            {text.experienceBullets.map((bullet) => (
               <li key={bullet} className="flex gap-3">
                 <CheckCircle2 className="mt-1 h-5 w-5 flex-none text-sky-300" />
                 <span>{bullet}</span>

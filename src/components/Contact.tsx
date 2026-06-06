@@ -1,10 +1,16 @@
 import { useState } from 'react'
 import { Check, Copy, Mail, Phone } from 'lucide-react'
+import { copy, type LanguageMode } from '../data/i18n'
 import { profile } from '../data/resume'
 import { Section } from './Section'
 
-export function Contact() {
+type ContactProps = {
+  language: LanguageMode
+}
+
+export function Contact({ language }: ContactProps) {
   const [copied, setCopied] = useState(false)
+  const text = copy[language]
 
   const copyEmail = async () => {
     try {
@@ -26,12 +32,13 @@ export function Contact() {
   }
 
   return (
-    <Section id="contact" eyebrow="Contact" title="Let’s build useful mobile products">
+    <Section
+      id="contact"
+      eyebrow={text.sections.contactEyebrow}
+      title={text.sections.contactTitle}
+    >
       <div className="rounded-lg border border-sky-400/30 bg-slate-900/80 p-6 sm:p-8">
-        <p className="max-w-3xl text-lg leading-8 text-slate-300">
-          Available for mobile app development conversations across React Native, Flutter, Android,
-          iOS, cloud-backed apps, and deployment pipelines.
-        </p>
+        <p className="max-w-3xl text-lg leading-8 text-slate-300">{text.contact.intro}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a
             href={`mailto:${profile.email}`}
@@ -46,7 +53,7 @@ export function Contact() {
             className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-slate-700 px-5 py-3 text-sm font-bold text-white transition hover:border-sky-300 hover:bg-sky-400/10 focus:outline-none focus:ring-2 focus:ring-sky-300"
           >
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-            {copied ? 'Copied' : 'Copy email'}
+            {copied ? text.contact.copied : text.contact.copyEmail}
           </button>
           <a
             href={`tel:${profile.phone.replace(/\s/g, '')}`}

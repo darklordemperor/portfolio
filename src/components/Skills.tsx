@@ -1,9 +1,16 @@
+import { copy, type LanguageMode } from '../data/i18n'
 import { skillGroups } from '../data/resume'
 import { Section } from './Section'
 
-export function Skills() {
+type SkillsProps = {
+  language: LanguageMode
+}
+
+export function Skills({ language }: SkillsProps) {
+  const text = copy[language]
+
   return (
-    <Section id="skills" eyebrow="Skills" title="Mobile and web skills with delivery tools">
+    <Section id="skills" eyebrow={text.sections.skillsEyebrow} title={text.sections.skillsTitle}>
       <div className="grid gap-5 lg:grid-cols-2">
         {skillGroups.map((group) => {
           const GroupIcon = group.icon
